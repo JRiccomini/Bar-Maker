@@ -26,6 +26,9 @@ If on Linux WSL1 - use pandas v1.24 or older, otherwise the program will hang up
 
 **Usage**
 
+Download the binary and put into the directory you want to run it from.
+
+
 The input file should be a file in a tab-delimited format (e.g. .tsv or .txt) with 1 row per sample & 1 column per characteristic and can include columns that will not be processed. The input file can easily be created by copying from an excel sheet into a txt file or saving an excel sheet as any tab-delimited format.
 
 The below file is an example for very few (this program is best used for large datasets) _C. jejuni_ isolates with data for clonal complex, quinolone resistance, tetracycline resistance and resistance to both antibiotic classes (presence marked as 1). Note the id and cgMLST columns will be ignored as they are not defined in char_dict below.
