@@ -58,7 +58,7 @@ The below file is an example for very few (this program is best used for large d
 
 You should edit the script itself before usage in 2 main ways - setting up dictionaries of value:colour pairs and pairing column headers to the appropriate dictionaries with the char_dict dictionary. The below examples are also found in the script itself.
 
-Firstly, set up dictionaries which relate the possible values for a certain characteristic to the RGB values of the desired colours. RGB values should be in [n, n, n] format, where n is a number between 0 and 255. Unassigned values will default to white, so not all values need to be defined if only looking at a subset of them.
+Firstly, set up dictionaries which relate the possible values for a certain characteristic to the RGB values of the desired colours. RGB values should be in [n, n, n] format, where n is a number between 0 and 255. Unassigned values will default to white, so not all values need to be defined if only looking at a subset.
 
     Example dictionary for _C. jejuni_ Clonal Complexes:               Example dictionary for resistance presence/absence (absence not defined as it will be white for a black/white pattern):
 
@@ -76,35 +76,37 @@ Firstly, set up dictionaries which relate the possible values for a certain char
               
                   "CC45":[247, 150, 70]}
 
-You should then edit the char_dict dictionary to relate the headers of each column to the appropriate dictionary. If a header is defined here but does not appear in the file it will be ignored, so you can build it out without deleting previous header:dictionary pairs. The most important part is that the header should exactly match the header (first row) of the appropriate column. Multiple headers can be matched to the same dictionary.
-You can also have unmatched dictionaries (i.e defined as above but not part of char_dict) if you don't want to use them but also don't want to delete them. 
+You should then edit the char_dict dictionary to relate the headers of each column to the appropriate dictionary. If a header is defined here but does not appear in the file it will be ignored, so you can build it out without deleting previous header:dictionary pairs. The most important part is that the header should exactly match the header (first row) of the appropriate column. These will also be the labels for each bar. Multiple headers can be matched to the same dictionary.
+You can also have unmatched dictionaries (i.e defined as above but not part of char_dict) if you don't want to use them but also don't want to delete them.
 
-The bars will be produced in the order in which headers are defined in char_dict, NOT the order in which they are input - keep this is mind as the program does not (currently) put headers on the bars.
+The bars will be produced in the order in which headers are defined in char_dict, NOT the order in which they appear in the input file.
 
 Below is an example of char_dict for the dictionaries above. CC_colours will only be used for the "CC" column, whereas Resistance_colours will be used for the other 3 characteristics to create 3 black and white (presence/absence) bars for the antibiotic resistances:
 
     char_dict = {"CC":CC_colours, "Quinolone Resistant":Resistance_colours, 
                 "Tetracycline Resistant":Resistance_colours, "Resistant to Both":Resistance_colours}
 
-Now you're all set! Run the program with `python bar_maker.py optional/path/input_file.txt`
+Now you're all set! Run the program with `python bar_maker.py path/to/input_file.tsv -o path/to/output_file -ff png -fs`
 
+Command line options are as follows:
+
+        -o         Name of output file. Should include path if necessary. Shouldn't include file extension (set this with -ff). Defaults to the input file with switched extension.
+        
+        -ff        Output file extension. Should not include the period before the extension name (e.g. png, jpg). Defaults to pdf.
+        
+        -fs        If included, opens the plot in a browser rather than writing to a file. This is more interactive and can be good when certain outlines are made thinner or thicker by the program - moving the plot around can solve this issue.
 
 
 ## Output
 
-The output will be a pdf file with the resulting image in the same directory as the input file and with the same name with the file extension switched to .pdf. The below example is the output for the above dictionaries and char_dict but with a larger input dataset. From left to right: clonal complex, quinolone resistance, tetracycline resistance and resistance to both as defined in char_dict.
+The below example is the output for the above dictionaries and char_dict but with a larger input dataset.
 
 
-
-![image](https://github.com/user-attachments/assets/612a074c-8f6c-40b5-b597-6f0549a5b3e5)
+![image](https://github.com/user-attachments/assets/2c31c5d2-dbff-4971-b5fe-c0dcd13d1bdf)
 
 
 ## Features To Be Added
 
-Testing around kaleido versions and Linux distributions to solve hang ups when running the program multiple times in succession
-
-`-o` to specify output file name - this will also enable changing of output file format
-
-Headers for characteristics & legends for value:colour pairs
+Legends for value:colour pairs
 
 Feel free to request features! (No promises though 😜)
